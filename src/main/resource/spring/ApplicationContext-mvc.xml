@@ -17,4 +17,27 @@
     -->
     <context:component-scan base-package="com.project" />
 
+    <!-- 配置SpringMVC的视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 上传拦截，如最大上传值及最小上传值 -->
+    <bean id="multipartResolver"   class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+        <property name="maxUploadSize">
+            <value>524288000</value>
+        </property>
+        <property name="maxInMemorySize">
+            <value>4096</value>
+        </property>
+        <property name="defaultEncoding">
+            <value>utf-8</value>
+        </property>
+    </bean>
+
+    <!--异常解析-->
+    <bean id="exceptionResolver" class="com.project.resolve.SpringExceptionResolver"></bean>
+    <!-- 对静态资源文件的访问  restful-->
+    <mvc:resources mapping="/static/**" location="/,/static/" />
 </beans>
