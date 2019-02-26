@@ -40,4 +40,12 @@
     <bean id="exceptionResolver" class="com.project.resolve.SpringExceptionResolver"></bean>
     <!-- 对静态资源文件的访问  restful-->
     <mvc:resources mapping="/static/**" location="/,/static/" />
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/**"/>
+            <bean class="com.project.interceptor.AuthorizedInterceptor"/>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
 </beans>
