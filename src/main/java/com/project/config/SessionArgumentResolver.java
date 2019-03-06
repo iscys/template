@@ -20,6 +20,7 @@ public class SessionArgumentResolver implements HandlerMethodArgumentResolver {
     public boolean supportsParameter(MethodParameter parameter) {
         //得到参数的类型
         Class<?> paramType = parameter.getParameterType();
+
         //参数是否有注解
       //  if (parameter.hasParameterAnnotation(RequestParam.class)) {
 
@@ -33,6 +34,8 @@ public class SessionArgumentResolver implements HandlerMethodArgumentResolver {
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 
         SessionAttribute sessionAttribute = parameter.getParameterAnnotation(SessionAttribute.class);
+        //参数名称
+        String parameterName = parameter.getParameterName();
         String value = sessionAttribute.value();//定义的session key
         HttpServletRequest http = webRequest.getNativeRequest(HttpServletRequest.class);
         HttpSession session = http.getSession();
