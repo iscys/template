@@ -4,6 +4,7 @@ import com.project.config.SessionAttribute;
 import com.project.model.UserModel;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,7 +27,7 @@ public class MainController {
    }
 
     @RequestMapping("addSession")
-    public void addSession(UserModel userModel, HttpServletRequest req)throws Exception{
+    public void addSession(@ModelAttribute UserModel userModel, HttpServletRequest req)throws Exception{
       req.getSession().setAttribute("user",userModel);
     }
 }
