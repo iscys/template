@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import com.project.common.fileupload.FtpUpload;
 import com.project.config.SessionAttribute;
 import com.project.model.UserModel;
 import org.apache.commons.io.FileUtils;
@@ -36,19 +37,6 @@ public class MainController {
 
     public static void main(String[] args) throws Exception {
         FileInputStream inputStream =new FileInputStream("/Users/iscys/Desktop/12.jpg");
-        FTPClient ftp = new FTPClient();
-        ftp.connect("47.95.245.138", 21);
-        ftp.login("107417", "107417");
-        ftp.setFileType(2);
-
-        int reply = ftp.getReplyCode();
-        if (!FTPReply.isPositiveCompletion(reply)) {
-            System.err.println("FTP服务器拒绝连接 ");
-            ftp.disconnect();
-        }
-        ftp.setControlEncoding("UTF-8");
-        boolean b = ftp.storeFile("123.jpg", inputStream);
-        System.out.println(b);
-        System.out.println(reply);
+        FtpUpload.getInstance().uploadFile(inputStream,"jpg",null);
     }
 }
