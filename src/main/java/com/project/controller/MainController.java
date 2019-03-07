@@ -35,7 +35,7 @@ public class MainController {
 
 
     public static void main(String[] args) throws Exception {
-        FileInputStream inputStream =new FileInputStream("C:/Users/cys/Desktop/www.jpg");
+        FileInputStream inputStream =new FileInputStream("/Users/iscys/Desktop/12.jpg");
         FTPClient ftp = new FTPClient();
         ftp.connect("47.95.245.138", 21);
         ftp.login("107417", "107417");
@@ -47,7 +47,7 @@ public class MainController {
             ftp.disconnect();
         }
         ftp.setControlEncoding("UTF-8");
-        boolean b = ftp.storeFile("www.jpg", inputStream);
+        boolean b = ftp.storeFile("123.jpg", inputStream);
         System.out.println(b);
         System.out.println(reply);
     }
