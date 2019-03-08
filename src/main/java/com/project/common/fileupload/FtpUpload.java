@@ -110,10 +110,13 @@ public class FtpUpload {
             ftp.logout();
             String filePath= ftp.printWorkingDirectory();
             filePath =filePath.replaceFirst(this.basePath,"");
-            String fileUrl =this.url+filePath+"/"+fileName;
+            if(StringUtils.isNoneBlank(filePath)){
+                filePath+="/";
+            }
+            String fileUrl =this.url+filePath+fileName;
             fileModel.setFileName(fileName);
             fileModel.setSuffixType(suffixType);
-            fileModel.setFilePath(ftp.printWorkingDirectory());
+            fileModel.setFilePath(ftp.printWorkingDirectory());//直接工作目录
             fileModel.setUrl(fileUrl);
         } catch (Exception e) {
             e.getMessage();
