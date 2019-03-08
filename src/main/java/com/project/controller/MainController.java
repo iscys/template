@@ -38,8 +38,9 @@ public class MainController {
 
 
     public static void main(String[] args) throws Exception {
-        FileInputStream inputStream =new FileInputStream("C:/Users/cys/Desktop/www.jpg");
-        FtpUpload.getInstance().uploadFile(inputStream,"jpg",null);
+        FileInputStream inputStream =new FileInputStream("/Users/iscys/Desktop/12.jpg");
+        FileModel jpg = FtpUpload.getInstance().uploadFile(inputStream, "jpg", "/me/look");
+        System.out.println(jpg.getUrl());
 
 
     }
