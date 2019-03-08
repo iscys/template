@@ -16,7 +16,7 @@ import java.util.Properties;
 /**
  * Ftp 文件上传
  */
-public class FtpUpload {
+public class FtpUpload extends FileUtils{
     private Properties config;
     private String username;
     private String password;
@@ -163,13 +163,5 @@ public class FtpUpload {
         return is_ok;
     }
 
-    /**
-     * 得到文件后缀类型
-     * @param originalFilename
-     * @return
-     */
-    public static String getSuffixType(String originalFilename){
 
-        return originalFilename.substring(originalFilename.lastIndexOf(".")+1);
-    }
 }
