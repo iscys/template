@@ -1,15 +1,17 @@
 package com.project.controller;
 
 import com.project.common.fileupload.FtpUpload;
-import com.project.config.SessionAttribute;
+import com.project.common.model.FileModel;
 import com.project.model.UserModel;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.InputStream;
 
 @Controller
 @RequestMapping("/main")
@@ -19,13 +21,18 @@ public class MainController {
    @RequestMapping("index")
     public ModelAndView index(HttpServletRequest req)throws Exception{
        ModelAndView mv =new ModelAndView();
-       mv.setViewName("index");
+       mv.setViewName("upload");
        return mv;
    }
 
-    @RequestMapping("addSession")
-    public void addSession( @RequestHeader("Accept") String head, @CookieValue("NAME") String NAME, @ModelAttribute UserModel userModel, HttpServletRequest req)throws Exception{
-      req.getSession().setAttribute("user",userModel);
+    @RequestMapping("upload")
+    public void upload(MultipartFile file, HttpServletRequest req)throws Exception{
+        InputStream fileStream = file.getInputStream();
+        String filename = file.getOriginalFilename();
+        String suff =filename.substring(filename.lastIndexOf(".")+1);
+        FileModel fileModel = FtpUpload.getInstance().uploadFile(fileStream, suff, null);
+        System.out.println(fileModel);
+
     }
 
 
