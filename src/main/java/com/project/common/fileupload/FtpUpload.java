@@ -109,10 +109,8 @@ public class FtpUpload {
             if(!is_ok){System.out.println("上传失败");}
             ftp.logout();
             String filePath= ftp.printWorkingDirectory();
-            filePath =filePath.replaceFirst(this.basePath,"");
-            if(StringUtils.isNoneBlank(filePath)){
-                filePath+="/";
-            }
+            filePath =filePath.replaceFirst(this.basePath,"")+"/";
+
             String fileUrl =this.url+filePath+fileName;
             fileModel.setFileName(fileName);
             fileModel.setSuffixType(suffixType);
