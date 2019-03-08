@@ -7,6 +7,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.AlternativeJdkIdGenerator;
+import org.springframework.util.IdGenerator;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/main")
@@ -36,7 +39,8 @@ public class MainController {
 
 
     public static void main(String[] args) throws Exception {
-        FileInputStream inputStream =new FileInputStream("/Users/iscys/Desktop/12.jpg");
+        FileInputStream inputStream =new FileInputStream("C:/Users/cys/Desktop/www.jpg");
         FtpUpload.getInstance().uploadFile(inputStream,"jpg",null);
+
     }
 }

@@ -1,6 +1,9 @@
 package com.project.common.fileupload;
 
 
+import com.project.common.model.FileModel;
+import com.project.common.tool.IdGenerator;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.util.Assert;
@@ -19,6 +22,7 @@ public class FtpUpload {
     private String host;
     private Integer port;
     private String url;
+    private String basePath;
 
     /**
      * 单例模式模式
@@ -55,11 +59,14 @@ public class FtpUpload {
             Assert.notNull(port, "ftp登连接端口不能为空");
             String url = config.getProperty("ftp.url");
             Assert.notNull(url, "url 不能为空");
+            String basePath = config.getProperty("ftp.basePath");
+            Assert.notNull(basePath, "basePath 不能为空");
             this.username = username;
             this.password = password;
             this.host = ip;
             this.port = Integer.valueOf(port);
             this.url = url;
+            this.basePath=basePath;
 
         } catch (Exception e) {
             e.getMessage();
@@ -70,11 +77,12 @@ public class FtpUpload {
     /**
      * @param inputStream 文件流
      * @param suffixType  后缀类型
-     * @param customPath  自定义的路径，要上传的路径可以为空
+     * @param customPath  自定义的路径，要上传的路径可以为空,上传默认路径
      * @return
      * @throws Exception
      */
-    public boolean uploadFile(InputStream inputStream, String suffixType, String customPath) {
+    public FileModel uploadFile(InputStream inputStream, String suffixType, String customPath) {
+        FileModel fileModel =new FileModel();
         FTPClient ftp = null;
         boolean is_ok = false;
         try {
@@ -89,11 +97,23 @@ public class FtpUpload {
                 System.err.println("FTP服务器拒绝连接 ");
                 ftp.disconnect();
             }
+            Long ids = IdGenerator.getKey();
+            String fileName =ids+"."+suffixType;
             ftp.setControlEncoding("UTF-8");
-            is_ok = ftp.storeFile("12398.jpg", inputStream);
+            //切换目录，没有则创建目录
+            if(StringUtils.isNoneBlank(customPath)){
+                changeWorkingDir(ftp, customPath);
+            }
+            is_ok = ftp.storeFile(fileName, inputStream);
             if(!is_ok){System.out.println("上传失败");}
             ftp.logout();
-
+            String filePath= ftp.printWorkingDirectory();
+            filePath =filePath.replaceFirst(this.basePath,"");
+            String fileUrl =this.url+filePath+fileName;
+            fileModel.setFileName(fileName);
+            fileModel.setSuffixType(suffixType);
+            fileModel.setFilePath(ftp.printWorkingDirectory());
+            fileModel.setUrl(fileUrl);
         } catch (Exception e) {
             e.getMessage();
         } finally {
@@ -109,7 +129,35 @@ public class FtpUpload {
                 e.getMessage();
             }
         }
-        return is_ok;
+        return fileModel;
 
+    }
+
+    /**
+     * 改变并创建目录
+     * @param ftp
+     * @param customPath
+     * @return
+     */
+    public static boolean changeWorkingDir(FTPClient ftp, String customPath) {
+        boolean is_ok=false;
+           try{
+               boolean hasDirectory = ftp.changeWorkingDirectory(customPath);
+               if(!hasDirectory){
+                   String[] strArray = customPath.split("/");
+                    if(strArray!=null &&strArray.length>0) {
+                        for (String path : strArray) {
+                            if(StringUtils.isNoneBlank(path)&&!ftp.changeWorkingDirectory(path)){
+                                    ftp.makeDirectory(path);
+                                is_ok= ftp.changeWorkingDirectory(path);
+                            }
+                        }
+                    }
+               }
+               return is_ok;
+           }catch (Exception e){
+               e.getMessage();
+           }
+        return is_ok;
     }
 }
