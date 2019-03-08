@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import com.project.common.fileupload.FileUtils;
 import com.project.common.fileupload.FtpUpload;
 import com.project.common.model.FileModel;
 import com.project.model.UserModel;
@@ -39,7 +40,7 @@ public class MainController {
 
     public static void main(String[] args) throws Exception {
         FileInputStream inputStream =new FileInputStream("/Users/iscys/Desktop/12.jpg");
-        FileModel jpg = FtpUpload.getInstance().uploadFile(inputStream, "jpg", "/me/look");
+        FileModel jpg = FtpUpload.getInstance().uploadFile(inputStream, FileUtils.getSuffixType("/Users/iscys/Desktop/12.jpg"), "/me/look");
         System.out.println(jpg.getUrl());
 
 
