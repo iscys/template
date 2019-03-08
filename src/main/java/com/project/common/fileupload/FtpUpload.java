@@ -162,4 +162,14 @@ public class FtpUpload {
            }
         return is_ok;
     }
+
+    /**
+     * 得到文件后缀类型
+     * @param originalFilename
+     * @return
+     */
+    public static String getSuffixType(String originalFilename){
+
+        return originalFilename.substring(originalFilename.lastIndexOf(".")+1);
+    }
 }
