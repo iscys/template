@@ -32,7 +32,7 @@
 <body>
 
 <!--autoplay用来使其自动播放，muted用来使其静音，loop为循环播放-->
-<video src="http://s3.bytecdn.cn/aweme/resource/web/static/image/index/tvc-v2_30097df.mp4" type="video/mp4" autoplay muted loop class="video-bg" >
+<video src="http://47.95.245.138:9013/dance.mp4" type="video/mp4" autoplay muted loop class="video-bg" >
     很抱歉，你的浏览器不支持播放视频
 </video>
 <nav class="navbar  clearFloat my-navbar"    role="navigation">
