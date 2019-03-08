@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.FileInputStream;
 import java.io.InputStream;
 
 @Controller
@@ -37,18 +38,9 @@ public class MainController {
 
 
     public static void main(String[] args) throws Exception {
-       // FileInputStream inputStream =new FileInputStream("/Users/iscys/Desktop/12.jpg");
-       // FtpUpload.getInstance().uploadFile(inputStream,"jpg",null);
-        FTPClient ftp =new FTPClient();
-        ftp.connect("47.95.245.138",21);
-        ftp.login("107417","107417");
-        int reply = ftp.getReplyCode();
-        if (!FTPReply.isPositiveCompletion(reply)) {
-            System.err.println("FTP服务器拒绝连接 ");
-            ftp.disconnect();
-        }
-        System.out.println(ftp.printWorkingDirectory());
-        FtpUpload.changeWorkingDir(ftp,"is/io/op/");
-        System.out.println(ftp.printWorkingDirectory());
+        FileInputStream inputStream =new FileInputStream("C:/Users/cys/Desktop/www.jpg");
+        FtpUpload.getInstance().uploadFile(inputStream,"jpg",null);
+
+
     }
 }
