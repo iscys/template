@@ -107,7 +107,6 @@ public class FtpUpload {
             }
             is_ok = ftp.storeFile(fileName, inputStream);
             if(!is_ok){System.out.println("上传失败");}
-            ftp.logout();
             String filePath= ftp.printWorkingDirectory();
             filePath =filePath.replaceFirst(this.basePath,"")+"/";
 
@@ -116,6 +115,7 @@ public class FtpUpload {
             fileModel.setSuffixType(suffixType);
             fileModel.setFilePath(ftp.printWorkingDirectory());//直接工作目录
             fileModel.setUrl(fileUrl);
+            ftp.logout();
         } catch (Exception e) {
             e.getMessage();
         } finally {
