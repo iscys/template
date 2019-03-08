@@ -8,6 +8,7 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.util.Assert;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -109,7 +110,7 @@ public class FtpUpload {
             ftp.logout();
             String filePath= ftp.printWorkingDirectory();
             filePath =filePath.replaceFirst(this.basePath,"");
-            String fileUrl =this.url+filePath+fileName;
+            String fileUrl =this.url+filePath+"/"+fileName;
             fileModel.setFileName(fileName);
             fileModel.setSuffixType(suffixType);
             fileModel.setFilePath(ftp.printWorkingDirectory());
