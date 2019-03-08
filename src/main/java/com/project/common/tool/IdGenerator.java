@@ -16,11 +16,11 @@ public class IdGenerator {
         String key = "" + System.currentTimeMillis() + Math.abs(rand.nextInt(1000000));
         return Long.parseLong(key);
     }
-
+/**
     public static Long ids(){
         org.springframework.util.IdGenerator generator =new AlternativeJdkIdGenerator();
         UUID uuid = generator.generateId();
         return uuid.getMostSignificantBits();
     }
-
+**/
 }
