@@ -20,7 +20,7 @@
 
 <body>
     <form action="main/upload" method="post" name="Form" id="Form" enctype="multipart/form-data">
-        <input type="file" name =file>
+        <input type="file" name ="file">
         <input type="submit">
 
     </form>

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * spring 提供的修改bean 的接口 ，可以在进行修改Spring beandefination 的内容，定制
  */
 @Service
-public class BeanPostDefination implements BeanDefinitionRegistryPostProcessor {
+public class BeanPostRegistryDefination implements BeanDefinitionRegistryPostProcessor {
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
         int before = registry.getBeanDefinitionCount();

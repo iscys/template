@@ -3,10 +3,14 @@ package com.project.controller;
 import com.project.common.fileupload.FileUtils;
 import com.project.common.fileupload.FtpUpload;
 import com.project.common.model.FileModel;
+import com.project.model.UserModel;
+import com.project.service.MainService;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +28,18 @@ import java.util.List;
 @RequestMapping("/main")
 public class MainController {
 
+    @Autowired
+    MainService mainService;
+
+    MainController(){
+        System.out.println("Main controller");
+    }
 
    @RequestMapping("index")
     public ModelAndView index(HttpServletRequest req)throws Exception{
+        System.out.println(mainService);
        ModelAndView mv =new ModelAndView();
+       mainService.updateData();
        mv.setViewName("upload");
        return mv;
    }
@@ -56,11 +68,10 @@ public class MainController {
         long size = fileItem.getSize();
     }
 
-
     public static void main(String[] args) throws Exception {
-        FileInputStream inputStream =new FileInputStream("/Users/iscys/Desktop/12.jpg");
-        FileModel jpg = FtpUpload.getInstance().uploadFile(inputStream, FileUtils.getSuffixType("/Users/iscys/Desktop/12.jpg"), "/me/look");
-        System.out.println(jpg.getUrl());
+       // ClassPathXmlApplicationContext context =new ClassPathXmlApplicationContext("classpath:spring/whoareyou.xml");
+
+        //System.out.println(context.getBean("mainServiceImpl"));
 
 
     }
