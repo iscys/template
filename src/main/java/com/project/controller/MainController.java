@@ -1,6 +1,5 @@
 package com.project.controller;
 
-import com.project.common.fileupload.FileUtils;
 import com.project.common.fileupload.FtpUpload;
 import com.project.common.model.FileModel;
 import com.project.model.UserModel;
@@ -9,18 +8,15 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
-import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -72,7 +68,28 @@ public class MainController {
        // ClassPathXmlApplicationContext context =new ClassPathXmlApplicationContext("classpath:spring/whoareyou.xml");
 
         //System.out.println(context.getBean("mainServiceImpl"));
+/**
+        String hello="hello";
+        String he ="he";
+        System.out.println(hello=="hello");
+        System.out.println(hello==he+"llo");
+        System.out.println("hello"=="he"+"llo");
+        System.out.println(hello ==new String("hello").intern());
 
+        HashSet<UserModel> result =new HashSet<>();
+        UserModel m =new UserModel();
+        result.add(m);
+        result.add(m);
+        System.out.println(result.size());
+ **/
 
+        String s =new String("hello");
+        updateStr(s);
+        System.out.println(s);
     }
+
+    private static void updateStr(String s) {
+            s="world";
+    }
+
 }

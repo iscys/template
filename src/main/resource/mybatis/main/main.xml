@@ -4,7 +4,7 @@
 
 	<update id="updateDate">
 		update sdb_dianlu_user
-		set relname ='5'
+		set relname ='7'
 		where id='2'
 	</update>
 
