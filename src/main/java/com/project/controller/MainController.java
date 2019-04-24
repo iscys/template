@@ -42,6 +42,7 @@ public class MainController {
 
     @RequestMapping("upload")
     public void upload(MultipartFile file, HttpServletRequest req)throws Exception{
+        /**
         DefaultMultipartHttpServletRequest request=(DefaultMultipartHttpServletRequest)req;
         Iterator<String> fileNames = request.getFileNames();
         MultiValueMap<String, MultipartFile> multiFileMap = request.getMultiFileMap();
@@ -62,26 +63,11 @@ public class MainController {
         String fieldName = fileItem.getFieldName();
         System.out.println(fieldName);
         long size = fileItem.getSize();
+         **/
     }
 
     public static void main(String[] args) throws Exception {
-       // ClassPathXmlApplicationContext context =new ClassPathXmlApplicationContext("classpath:spring/whoareyou.xml");
 
-        //System.out.println(context.getBean("mainServiceImpl"));
-/**
-        String hello="hello";
-        String he ="he";
-        System.out.println(hello=="hello");
-        System.out.println(hello==he+"llo");
-        System.out.println("hello"=="he"+"llo");
-        System.out.println(hello ==new String("hello").intern());
-
-        HashSet<UserModel> result =new HashSet<>();
-        UserModel m =new UserModel();
-        result.add(m);
-        result.add(m);
-        System.out.println(result.size());
- **/
 
         String s =new String("hello");
         updateStr(s);
