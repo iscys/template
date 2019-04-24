@@ -40,7 +40,7 @@
         </property>
     </bean>
 
-    <!--异常解析-->
+    <!--异常解析,发生错误就会进入到这个类中进行处理-->
     <bean id="exceptionResolver" class="com.project.resolve.SpringExceptionResolver"></bean>
     <!-- 对静态资源文件的访问  restful-->
     <mvc:resources mapping="/static/**" location="/,/static/" />
