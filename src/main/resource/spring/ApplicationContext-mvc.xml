@@ -9,11 +9,14 @@
 		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
         http://www.springframework.org/schema/tx/spring-tx-2.0.xsd"
 >
+
+    <!--spring mvc 配置 servlet 容器-->
     <context:component-scan base-package="com.project.controller" />
 
-    <!--开启注解，会自动扫描bean中@Controller @RequestMapping 注解并添加到urlMap 映射中-->
+    <!--annotation-driven
+    开启注解，会自动扫描bean中@Controller @RequestMapping 注解并添加到urlMap 映射中-->
     <mvc:annotation-driven>
-        <!--自定义参数解析器-->
+        <!--自定义参数解析器，这个自定义的参数解析器是用于方便获取session信息的-->
         <mvc:argument-resolvers>
             <bean class="com.project.config.SessionArgumentResolver"/>
         </mvc:argument-resolvers>
@@ -21,13 +24,13 @@
     </mvc:annotation-driven>
 
 
-    <!-- 配置SpringMVC的视图解析器 -->
+    <!-- 配置SpringMVC的视图解析器，页面跳转的策略 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!-- 上传拦截，如最大上传值及最小上传值 -->
+    <!-- 上传拦截，如最大上传值及最小上传值，涉及到文件上传，必须配置这个ID 是固定的 -->
     <bean id="multipartResolver"   class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
         <property name="maxUploadSize">
             <value>524288000</value>
@@ -45,6 +48,7 @@
     <!-- 对静态资源文件的访问  restful-->
     <mvc:resources mapping="/static/**" location="/,/static/" />
 
+    <!--spring 的拦截器相当于filter-->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**/**"/>

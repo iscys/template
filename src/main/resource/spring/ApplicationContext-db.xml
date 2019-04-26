@@ -14,11 +14,12 @@
               http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <!--会自动扫描com.project包下的类并注册为bean
+    <!--会自动扫描com.project包下的类带有@Component的注解注册为bean进行实例化
    所以当我们有context:component-scan标签时，可以省略annotation-config 标签了
    -->
     <context:component-scan base-package="com.project" />
 
+    <!--用来加载配置文件的-->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
@@ -85,7 +86,7 @@
         <property name="dataSource" ref ="dataSource"/>
     </bean>
 
-    <!-- 使用注解方式定义事务 -->
+    <!-- 使用注解方式定义事务，在需要事物的类上活着方法上标注@Translation -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
 
