@@ -15,7 +15,9 @@
 
 
     <!--会自动扫描com.project包下的类带有@Component的注解注册为bean进行实例化
-   所以当我们有context:component-scan标签时，可以省略annotation-config 标签了
+   所以当我们有context:component-scan标签时，可以省略annotation-config 标签了,
+   源码路经：==>ClassPathBeanDefinitionScanner.java 使用了默认filter 进行过滤
+   最后只会得到@Component 注解的类 @Controller @Service @Configuration 都属于@Component
    -->
     <context:component-scan base-package="com.project" />
 
@@ -28,7 +30,7 @@
         </property>
     </bean>
 
-    <!-- 阿里 druid数据库连接池 -->
+    <!-- 阿里 druid数据库连接池 spel-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
         <!-- 数据库基本信息配置 -->
         <property name="url" value="${url}" />
@@ -86,7 +88,7 @@
         <property name="dataSource" ref ="dataSource"/>
     </bean>
 
-    <!-- 使用注解方式定义事务，在需要事物的类上活着方法上标注@Translation -->
+    <!-- 使用注解方式定义事务，在需要事物的类上或着方法上标注@Translation -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
 
