@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthorizedInterceptor extends HandlerInterceptorAdapter {
     /**
      *访问前拦截
+     * 如果返回true 表示通行
      */
 
     @Override
