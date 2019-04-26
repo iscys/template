@@ -27,9 +27,7 @@ public class MainController {
     @Autowired
     MainService mainService;
 
-    MainController(){
-        System.out.println("Main controller");
-    }
+
 
    @RequestMapping("index")
     public ModelAndView index(HttpServletRequest req)throws Exception{
