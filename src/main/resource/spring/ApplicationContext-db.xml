@@ -88,7 +88,7 @@
         <property name="dataSource" ref ="dataSource"/>
     </bean>
 
-    <!-- 使用注解方式定义事务，在需要事物的类上或着方法上标注@Translation -->
+    <!-- 1使用注解方式定义事务，在需要事物的类上或着方法上标注@Translation -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
 
