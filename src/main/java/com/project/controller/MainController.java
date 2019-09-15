@@ -4,6 +4,7 @@ import com.project.common.fileupload.FtpUpload;
 import com.project.common.model.FileModel;
 import com.project.model.UserModel;
 import com.project.service.MainService;
+import com.project.utils.CommonUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -26,8 +27,15 @@ public class MainController {
 
     @Autowired
     MainService mainService;
+    @Autowired
+    private CommonUtils commonUtils;
 
 
+    @RequestMapping(value={"test","iscys"},params = {"one"})
+    @ResponseBody
+    public String test(){
+        return commonUtils.getName();
+    }
 
    @RequestMapping("index")
     public ModelAndView index(HttpServletRequest req)throws Exception{

@@ -19,7 +19,7 @@
    源码路经：==>ClassPathBeanDefinitionScanner.java 使用了默认filter 进行过滤
    最后只会得到@Component 注解的类 @Controller @Service @Configuration 都属于@Component
    -->
-    <context:component-scan base-package="com.project" />
+        <context:component-scan base-package="com.project" />
 
     <!--用来加载配置文件的-->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -88,7 +88,7 @@
         <property name="dataSource" ref ="dataSource"/>
     </bean>
 
-    <!-- 使用注解方式定义事务，在需要事物的类上或着方法上标注@Translation -->
+    <!-- cys001asaq1使用注解方式定义事务，在需要事物的类上或着方法上标注@Translation -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
 
