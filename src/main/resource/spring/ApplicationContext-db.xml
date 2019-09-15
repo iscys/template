@@ -39,7 +39,7 @@
         <property name="driverClassName" value="${driverClassName}" />
         <property name="filters" value="${filters}" />
         <!-- 最大并发连接数 -->
-        <property name="maxActive" value="${maxActive}" />
+        <property name="maxActive" value="21" />
         <!-- 初始化连接数量 -->
         <property name="initialSize" value="${initialSize}" />
         <!-- 配置获取连接等待超时的时间 -->
